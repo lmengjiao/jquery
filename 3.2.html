@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--导入jQuery数据库-->
+		<script src="jquery-3.6.0.js"></script>
+	</head>
+	<body>
+		<form action="" method="post">
+			<p>请选择你的爱好</p>
+			<input type="checkbox" name="check"/>全选/全不选<br>
+			<input type="checkbox" name="check"/>足球
+			<input type="checkbox" name="check"/>篮球
+			<input type="checkbox" name="check"/>游泳
+			<input type="checkbox" name="check"/>唱歌
+		</form>
+		
+		<button onclick="qx()" value="全选">全选</button>
+		<button onclick="qbx()" value="全不选">全不选</button>
+		<button onclick="fx()" value="反选">反选</button>
+		<button onclick="tj()" value="提交">提交</button>
+		
+		<script>
+			/*attr(checked,true)值为true就是选中的意思*/
+			function qx(){
+				$(":checkbox[name='check']").attr("checked",true);
+			}
+			function qbx(){
+				$(":checkbox[name='check']").attr("checked",false);
+			}
+			/*each循环*/
+			function fx(){
+				$("input[name='check']").each(function(){
+					this.checked=!this.checked;
+				});
+			}
+		</script>
+	</body>
+</html>
