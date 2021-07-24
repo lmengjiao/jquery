@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		        * {
+		            margin: 0;
+		            padding: 0;
+		        }
+		        div {
+		            width: 1000px;
+		            height: 350px;
+		            border: 3px solid #ccc;
+		            margin: 5px auto;
+		            overflow: auto;
+		        }
+		        table {
+		            border-collapse: collapse;
+		            width: 100%;
+		        }
+		        td {
+		            border: 1px solid black;
+		            text-align: center;
+		            height: 30px;
+		        }
+		        caption {
+		            font-size: 28px;
+		            font-weight: bold;
+		        }
+		        #gwc input[type="text"] {
+		            width: 30px;
+		            margin-left: 4px;
+		            margin-right: 4px;
+		        }
+		        #gwc input[type="button"] {
+		            width: 20px;
+		        }
+		    </style>
+	</head>
+	<script src="jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+		        var sum;  //定义全局变量：购物车商品总计
+		        $(function() {
+		            //页面加载完成后给全局变量赋值
+		            sum = $("#sum");
+		        })
+		        function addGoods(btn) {
+		            var td = $(btn).parent();
+		            var tr = $(td).parent();
+		            var tds = $(tr).children();
+		            //创建一个行节点
+		            var newTr = $("<tr></tr>");
+		            //给行节点赋值
+		            newTr.html(
+		                '<td>' + tds[0].innerHTML + '</td>' +
+		                '<td>' + tds[1].innerHTML + '</td>' +
+		                '<td>' + tds[2].innerHTML + '</td>' +
+		                '<td>' + tds[3].innerHTML + '</td>' +
+		                '<td>' +
+		                    '<input type="button" value="-" onclick="reduce(this)" />' +
+		                    '<input type="text" value="1" readonly />' +
+		                    '<input type="button" value="+" onclick="add(this)" />' +
+		                '</td>' +
+		                '<td>' +
+		                    tds[2].innerHTML +
+		                '</td>' +
+		                '<td>' +
+		                    '<input type="button" value="X" onclick="deleteGoods(this);" />' +
+		                '</td>'
+		            );
+		            //追加新节点
+		            $("#gwc").append(newTr);
+		            //更新总计
+		            var s = parseFloat(sum.html());
+		            sum.html(s + parseFloat(tds[2].innerHTML));
+		        }
+		        function add(btn) {
+		            //获取按钮的上一个兄弟
+		            var txt = $(btn).prev();
+		            txt.val(parseFloat(txt.val()) + 1);
+		            //获取该商品的单价
+		            var price = $(btn).parent().prev().prev();
+		            //更新总计
+		            var s = parseFloat(sum.html());
+		            sum.html(s + parseFloat(price.html()));
+		        }
+		        function reduce(btn) {
+		            //获取按钮的下一个兄弟
+		            var txt = $(btn).next();
+		            if (parseFloat(txt.val()) == 1) {
+		                return;
+		            }
+		            txt.val(parseFloat(txt.val()) - 1);
+		            //获取该商品的单价
+		            var price = $(btn).parent().prev().prev();
+		            //更新总计
+		            var s = parseFloat(sum.html());
+		            sum.html(s - parseFloat(price.html()));
+		        }
+		        function deleteGoods(btn) {
+		            //获取当前行
+		            var tr = $(btn).parent().parent();
+		            //删除当前行
+		            tr.remove();
+		            //获取该商品的单价
+		            var price = $(btn).parent().siblings().eq(1);
+		            //更新总计
+		            var s = parseFloat(sum.html());
+		            sum.html(s - parseFloat(price.html()));
+		        }
+		    </script>
+<body>
+		 <div id="goodsStore">
+		        <table>
+		            <caption>真划算</caption>
+		            <thead>
+		                <tr>
+		                    <td>商品编号</td>
+		                    <td>商品名称</td>
+		                    <td>商品单价</td>
+		                    <td>商品颜色</td>
+		                    <td>商品库存</td>
+		                    <td>操作</td>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <tr>
+		                    <td>罗技M185鼠标</td>
+		                    <td>80</td>
+		                    <td>黑色</td>
+		                    <td>893</td>
+		                    <td>98%</td>
+		                    <td>
+		                        <input type="button" value="加入购物车" onclick="addGoods(this);" />
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>微软X470键盘</td>
+		                    <td>150</td>
+		                    <td>黑色</td>
+		                    <td>9028</td>
+		                    <td>96%</td>
+		                    <td>
+		                        <input type="button" value="加入购物车" onclick="addGoods(this);" />
+		                    </td>
+		                </tr>
+		                <tr>
+		                   <td>洛克iphone6手机壳</td>
+		                   <td>60</td>
+		                   <td>透明</td>
+		                   <td>672</td>
+		                   <td>99%</td>
+		                    <td>
+		                        <input type="button" value="加入购物车" onclick="addGoods(this);" />
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td>蓝牙耳机</td>
+		                    <td>100</td>
+		                    <td>蓝色</td>
+		                    <td>8937</td>
+		                    <td>95%</td>
+		                    <td>
+		                        <input type="button" value="加入购物车" onclick="addGoods(this);" />
+		                    </td>
+		                </tr>
+						<tr>
+						    <td>金士顿U盘</td>
+						    <td>70</td>
+						    <td>红色</td>
+						    <td>482</td>
+						    <td>100%</td>
+						    <td>
+						        <input type="button" value="加入购物车" onclick="addGoods(this);" />
+						    </td>
+						</tr>
+		            </tbody>
+		        </table>
+		    </div>
+		    <div id="goodsPay">
+		        <table>
+		            <caption>购 物 车</caption>
+		            <thead>
+		                <tr>
+		                    <td>商品编号</td>
+		                    <td>商品名称</td>
+		                    <td>商品单价</td>
+		                    <td>商品颜色</td>
+		                    <td>购买数量</td>
+		                    <td>单项小计</td>
+		                    <td>操作</td>
+		                </tr>
+		            </thead>
+		            <tbody id="gwc">
+		            </tbody>
+		            <tfoot>
+		                <tr>
+		                    <td colspan="5">总计</td>
+		                    <td colspan="2" id="sum">0</td>
+		                </tr>
+		            </tfoot>
+		        </table>
+		    </div>
+		</body>
+</html>
