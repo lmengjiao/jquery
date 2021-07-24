@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.6.0.js"></script>
+		<script type="text/javascript"></script>
+		<script>
+			$(function(){
+				$("#btn1").click(function(){
+					$("#s2").css("background","cornflowerblue");
+				})
+			})
+			
+			$(function(){
+				$("#btn2").click(function(){
+					$("#s5,#s2").css("background","cornflowerblue");
+				})
+			})
+			
+			$(function(){
+				$("#btn3").click(function(){
+					$("#c2,#c4").attr("checked","true");
+				})
+			})
+			
+			$(function(){
+				$("#btn4").click(function(){
+					$("#r2").attr("checked","true");
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<input type="button" value="使下拉框的2号被选中" id="btn1"/><br>
+		<input type="button" value="使下拉框的2号和5号被选中"id="btn2"/><br>
+		<input type="button" value="使复选框的复选2和复选4被选中" id="btn3"/><br>
+		<input type="button" value="使单选框的单选2被选中" id="btn4"/><br>
+		<input type="button" value="打印已经被选中的值"/><br>
+		<select>
+			<option>1号</option>
+			<option id="s2">2号</option>
+			<option>3号</option>
+			<option>4号</option>
+			<option id="s5">5号</option>
+			<option>6号</option>
+		</select><br>
+		<input type="checkbox" name="a" />复选1
+		<input type="checkbox" name="a" id="c2"/>复选2
+		<input type="checkbox" name="a" />复选3
+		<input type="checkbox" name="a" id="c4"/>复选4<br />
+		<input type="radio" name="b" />单选1
+		<input type="radio" name="b" id="r2"/>单选2
+		<input type="radio" name="b" />单选3
+	</body>
+</html>
