@@ -24,7 +24,7 @@
 				<td>女</td>
 				<td>浙江杭州</td>
 			</tr>
-			<tr class="hunan">
+			<tr>
 				<td>王五</td>
 				<td>男</td>
 				<td>湖南长沙</td>
@@ -48,11 +48,13 @@
 		<button onclick="trcolor()">表格 按行间隔变色</button>
 		<script>
 			function trcolor(){
-				/*odd 偶数行       even奇数行*/
+				/*odd 奇数行的下标       even偶数行的下标 */
 				$("tr:odd").css("background","gray");
 				$("tr:even").css("background","white");
-				$(".hunan").css("background","pink");
-				$(".hunan").css("color","red");
+				$("tr:contains('湖南')").hover(function(){
+					$(this).css("background","pink");
+					$(this).css("color","red");
+				})
 				$(".thead").css("font-weight","bold");
 			}
 		</script>
